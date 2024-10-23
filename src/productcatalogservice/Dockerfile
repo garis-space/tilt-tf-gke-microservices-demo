@@ -24,8 +24,7 @@ COPY . .
 ARG SKAFFOLD_GO_GCFLAGS
 RUN CGO_ENABLED=0 GOOS=linux go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /productcatalogservice .
 
-FROM scratch
-
+FROM alpine:latest
 WORKDIR /src
 COPY --from=builder /productcatalogservice ./server
 COPY products.json .
